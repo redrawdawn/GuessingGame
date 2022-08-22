@@ -7,6 +7,8 @@ string difficulty = Console.ReadLine().ToLower();
 
 int attempts = 0;
 
+bool cheater = false;
+
 switch(difficulty)
 {
     case "e":
@@ -20,11 +22,18 @@ switch(difficulty)
     case "h":
     attempts = 4;
     break;
+
+    case "cheat": 
+    {
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("Cheater mode enabled!");
+    cheater = true; 
+    break;}
 }
 
 Console.WriteLine("Guess a secret number: ");
 
-while(attempts > 0)
+while(attempts > 0 || cheater)
 {
     attempts--;
     int guessedNumber = int.Parse(Console.ReadLine());
@@ -33,7 +42,7 @@ while(attempts > 0)
      ? "Too high" : "Too low";
 
     string onWrong = (attempts != 0) 
-    ? $"{highOrLow}, You have {attempts} tries left" 
+    ? $"{highOrLow}, You have {(cheater ? "*" : attempts)} tries left" 
     : $"All out of tries,\nThe number was {secretNumber}";
 
     bool correct = guessedNumber == secretNumber;
