@@ -1,8 +1,28 @@
 ﻿using System;
 
 Console.Write("Guess a secret number: ");
-int guessedNumber = int.Parse(Console.ReadLine());
+
 int secretNumber = 42;
-string result = (guessedNumber == secretNumber)
-? "you guessed tje secret number" : "try again";
-Console.WriteLine(result);
+
+int attempts = 4;
+
+while(attempts > 0)
+{
+    attempts--;
+    int guessedNumber = int.Parse(Console.ReadLine());
+
+    string onWrong = (attempts != 0) ? $"Try again... You have {attempts} tries left" : "All out of tries";
+
+    bool correct = guessedNumber == secretNumber;
+
+    string result = (correct)? "You got the secret number!!" : onWrong;
+    Console.WriteLine(result);
+    
+    if (correct)
+    break;
+}
+
+
+
+
+
